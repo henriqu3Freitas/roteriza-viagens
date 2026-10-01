@@ -57,7 +57,45 @@
 
     <section id="viagens" aria-labelledby="lista-titulo">
       <h2 id="lista-titulo">Minhas viagens</h2>
-      <p>A lista de viagens será apresentada nesta área.</p>
+      <table>
+        <caption>Viagens cadastradas</caption>
+        <thead>
+          <tr>
+            <th>Destino</th>
+            <th>Data de ida</th>
+            <th>Data de volta</th>
+            <th>Orçamento</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Paris, França</td>
+            <td><time datetime="2024-10-15">15/10/2024</time></td>
+            <td><time datetime="2024-10-22">22/10/2024</time></td>
+            <td>R$ 8.500,00</td>
+            <td>Planejada</td>
+            <td><a href="#detalhes-paris">Ver detalhes</a> | <a href="#cadastro">Editar</a> | <button type="button">Excluir</button></td>
+          </tr>
+          <tr>
+            <td>Amsterdã, Holanda</td>
+            <td><time datetime="2024-12-02">02/12/2024</time></td>
+            <td><time datetime="2024-12-09">09/12/2024</time></td>
+            <td>R$ 5.200,00</td>
+            <td>Planejada</td>
+            <td><a href="#detalhes-amsterda">Ver detalhes</a> | <a href="#cadastro">Editar</a> | <button type="button">Excluir</button></td>
+          </tr>
+          <tr>
+            <td>Salvador, Brasil</td>
+            <td><time datetime="2024-07-10">10/07/2024</time></td>
+            <td><time datetime="2024-07-15">15/07/2024</time></td>
+            <td>R$ 2.000,00</td>
+            <td>Concluída</td>
+            <td><a href="#detalhes-salvador">Ver detalhes</a> | <a href="#cadastro">Editar</a> | <button type="button">Excluir</button></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
     <aside id="pesquisa" aria-labelledby="pesquisa-titulo">
