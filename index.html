@@ -25,7 +25,34 @@
 
     <section id="cadastro" aria-labelledby="cadastro-titulo">
       <h2 id="cadastro-titulo">Cadastrar nova viagem</h2>
-      <p>O formulário de cadastro será apresentado nesta área.</p>
+      <form action="#viagens" method="post">
+        <fieldset>
+          <legend>Dados da viagem</legend>
+          <p><label for="cidade">Cidade de destino:</label> <input type="text" id="cidade" name="cidade" required></p>
+          <p><label for="pais">País:</label> <input type="text" id="pais" name="pais" required></p>
+          <p><label for="ida">Data de ida:</label> <input type="date" id="ida" name="ida" required></p>
+          <p><label for="volta">Data de volta:</label> <input type="date" id="volta" name="volta" required></p>
+          <p><label for="orcamento">Orçamento estimado:</label> <input type="number" id="orcamento" name="orcamento" min="0" step="0.01"></p>
+          <p>
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+              <option value="planejada">Planejada</option>
+              <option value="andamento">Em andamento</option>
+              <option value="concluida">Concluída</option>
+            </select>
+          </p>
+          <p><label for="anotacoes">Anotações gerais:</label><br><textarea id="anotacoes" name="anotacoes" rows="5" cols="40"></textarea></p>
+        </fieldset>
+        <fieldset>
+          <legend>Informações do país</legend>
+          <p>Na próxima etapa, a REST Countries API poderá preencher estes dados.</p>
+          <p><label for="moeda">Moeda local:</label> <input type="text" id="moeda" name="moeda" readonly></p>
+          <p><label for="idioma">Idioma oficial:</label> <input type="text" id="idioma" name="idioma" readonly></p>
+          <p><label for="regiao">Região:</label> <input type="text" id="regiao" name="regiao" readonly></p>
+        </fieldset>
+        <button type="submit">Salvar viagem</button>
+        <button type="reset">Limpar formulário</button>
+      </form>
     </section>
 
     <section id="viagens" aria-labelledby="lista-titulo">
