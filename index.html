@@ -100,8 +100,59 @@
 
     <aside id="pesquisa" aria-labelledby="pesquisa-titulo">
       <h2 id="pesquisa-titulo">Pesquisar viagens</h2>
-      <p>Os controles de pesquisa, filtro e ordenação serão apresentados nesta área.</p>
+      <form action="#viagens" method="get">
+        <p>
+          <label for="destino-pesquisa">Pesquisar por cidade ou país:</label>
+          <input type="search" id="destino-pesquisa" name="destino" placeholder="Ex.: Paris">
+        </p>
+        <p>
+          <label for="filtro-status">Filtrar por status:</label>
+          <select id="filtro-status" name="status">
+            <option value="todos">Todos</option>
+            <option value="planejada">Planejada</option>
+            <option value="andamento">Em andamento</option>
+            <option value="concluida">Concluída</option>
+          </select>
+        </p>
+        <p>
+          <label for="ordenacao">Ordenar por:</label>
+          <select id="ordenacao" name="ordenacao">
+            <option value="data">Data da viagem</option>
+            <option value="destino">Destino</option>
+            <option value="orcamento">Orçamento</option>
+          </select>
+        </p>
+        <button type="submit">Pesquisar</button>
+      </form>
     </aside>
+
+    <section aria-labelledby="detalhes-titulo">
+      <h2 id="detalhes-titulo">Detalhes de uma viagem</h2>
+      <article id="detalhes-paris">
+        <h3>Paris, França</h3>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Torre Eiffel em Paris">
+          <figcaption>Destino da viagem planejada</figcaption>
+        </figure>
+        <p><strong>Período:</strong> 15/10/2024 a 22/10/2024</p>
+        <p><strong>Orçamento:</strong> R$ 8.500,00</p>
+        <p><strong>Status:</strong> Planejada</p>
+        <p><strong>Moeda:</strong> Euro (EUR)</p>
+        <p><strong>Idioma:</strong> Francês</p>
+        <p><strong>Região:</strong> Europa</p>
+        <p><strong>Anotações:</strong> Visitar a Torre Eiffel e conhecer alguns museus.</p>
+        <a href="#cadastro">Editar viagem</a>
+        <button type="button">Excluir viagem</button>
+      </article>
+      <article id="detalhes-amsterda">
+        <h3>Amsterdã, Holanda</h3>
+        <p>Viagem planejada para dezembro de 2024.</p>
+      </article>
+      <article id="detalhes-salvador">
+        <h3>Salvador, Brasil</h3>
+        <p>Viagem concluída em julho de 2024.</p>
+      </article>
+    </section>
   </main>
 
   <footer>
