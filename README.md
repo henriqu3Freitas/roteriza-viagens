@@ -1,4 +1,4 @@
-# Diário de Viagens
+# Roteriza
 
 Projeto da Etapa 1 para planejamento e registro de viagens.
 
@@ -14,11 +14,3 @@ A interface foi criada somente com HTML semântico e possui:
 - ações de editar e excluir previstas para as próximas etapas.
 
 Os botões e formulários ainda não possuem comportamento em JavaScript.
-
-## Como visualizar
-
-Abra o arquivo `index.html` diretamente no navegador.
-
-## Publicação no GitHub Pages
-
-No repositório do GitHub, acesse `Settings > Pages`, selecione `Deploy from a branch`, escolha a branch `main` e a pasta `/(root)`. Depois, acesse o endereço gerado para conferir a aplicação publicada.

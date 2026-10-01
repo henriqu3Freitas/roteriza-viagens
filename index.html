@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diário de Viagens</title>
+  <title>Roteiriza </title>
 </head>
 <body>
   <header>
-    <h1>Diário de Viagens</h1>
+    <h1>Roteiriza</h1>
     <p>Sistema para planejar e registrar viagens.</p>
-    <nav aria-label="Navegação principal">
+    <nav>
       <a href="#inicio">Início</a> |
       <a href="#viagens">Minhas viagens</a> |
       <a href="#cadastro">Cadastrar viagem</a> |
@@ -18,12 +18,12 @@
   </header>
 
   <main id="inicio">
-    <section aria-labelledby="resumo-titulo">
+    <section>
       <h2 id="resumo-titulo">Resumo</h2>
       <p>Este espaço apresentará um resumo das viagens cadastradas.</p>
     </section>
 
-    <section id="cadastro" aria-labelledby="cadastro-titulo">
+    <section id="cadastro">
       <h2 id="cadastro-titulo">Cadastrar nova viagem</h2>
       <form action="#viagens" method="post">
         <fieldset>
@@ -45,7 +45,6 @@
         </fieldset>
         <fieldset>
           <legend>Informações do país</legend>
-          <p>Na próxima etapa, a REST Countries API poderá preencher estes dados.</p>
           <p><label for="moeda">Moeda local:</label> <input type="text" id="moeda" name="moeda" readonly></p>
           <p><label for="idioma">Idioma oficial:</label> <input type="text" id="idioma" name="idioma" readonly></p>
           <p><label for="regiao">Região:</label> <input type="text" id="regiao" name="regiao" readonly></p>
@@ -55,7 +54,7 @@
       </form>
     </section>
 
-    <section id="viagens" aria-labelledby="lista-titulo">
+    <section id="viagens">
       <h2 id="lista-titulo">Minhas viagens</h2>
       <table>
         <caption>Viagens cadastradas</caption>
@@ -98,7 +97,7 @@
       </table>
     </section>
 
-    <aside id="pesquisa" aria-labelledby="pesquisa-titulo">
+    <aside id="pesquisa">
       <h2 id="pesquisa-titulo">Pesquisar viagens</h2>
       <form action="#viagens" method="get">
         <p>
@@ -126,7 +125,7 @@
       </form>
     </aside>
 
-    <section aria-labelledby="detalhes-titulo">
+    <section>
       <h2 id="detalhes-titulo">Detalhes de uma viagem</h2>
       <article id="detalhes-paris">
         <h3>Paris, França</h3>
@@ -144,10 +143,6 @@
         <a href="#cadastro">Editar viagem</a>
         <button type="button">Excluir viagem</button>
       </article>
-      <article id="detalhes-amsterda">
-        <h3>Amsterdã, Holanda</h3>
-        <p>Viagem planejada para dezembro de 2024.</p>
-      </article>
       <article id="detalhes-salvador">
         <h3>Salvador, Brasil</h3>
         <p>Viagem concluída em julho de 2024.</p>
@@ -156,7 +151,7 @@
   </main>
 
   <footer>
-    <p>Diário de Viagens - Etapa 1: estrutura HTML.</p>
+    <p>Roteiriza - Viagens</p>
   </footer>
 </body>
 </html>
