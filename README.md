@@ -1,6 +1,6 @@
-# Roteriza
+# Roteiriza
 
-Projeto da Etapa 1 para planejamento e registro de viagens.
+Projeto de planejamento e registro de viagens.
 
 ## Etapa 1
 
@@ -14,3 +14,18 @@ A interface foi criada somente com HTML semântico e possui:
 - ações de editar e excluir previstas para as próximas etapas.
 
 Os botões e formulários ainda não possuem comportamento em JavaScript.
+
+## Etapa 2 — CSS, Layout e Responsividade
+
+A interface foi evoluída com:
+
+- identidade visual baseada em tons de verde, creme e coral;
+- arquivo CSS externo com variáveis, seletores e Box Model;
+- layout construído com CSS Grid e Flexbox;
+- formulário, tabela, filtros e detalhes organizados em painéis;
+- estados de hover e foco visível nos controles;
+- tipografia, contraste, espaçamentos e hierarquia visual;
+- Media Queries para adaptação em tablets e celulares;
+- navegação responsiva sem rolagem horizontal injustificada.
+
+O comportamento dos dados continua previsto para uma etapa futura de JavaScript.
