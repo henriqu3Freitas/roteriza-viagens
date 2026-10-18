@@ -3,61 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roteiriza </title>
+  <meta name="description" content="Planeje e acompanhe suas próximas viagens com o Roteiriza.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Roteiriza | Planeje suas viagens</title>
 </head>
 <body>
-  <header>
-    <h1>Roteiriza</h1>
-    <p>Sistema para planejar e registrar viagens.</p>
-    <nav>
-      <a href="#inicio">Início</a> |
-      <a href="#viagens">Minhas viagens</a> |
-      <a href="#cadastro">Cadastrar viagem</a> |
+  <header class="site-header">
+    <div class="header-inner">
+    <a class="brand" href="#inicio" aria-label="Roteiriza - início">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span>Roteiriza</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a class="active" href="#inicio">Início</a>
+      <a href="#viagens">Minhas viagens</a>
+      <a href="#cadastro">Cadastrar viagem</a>
       <a href="#pesquisa">Pesquisar</a>
     </nav>
+    <a class="header-action" href="#cadastro">+ Nova viagem</a>
+    </div>
+    <div class="hero">
+    <div>
+      <p class="eyebrow">Seu próximo capítulo começa aqui</p>
+      <h1>Planeje momentos,<br><em>viva histórias.</em></h1>
+      <p class="hero-text">Organize seus destinos, acompanhe seus planos e deixe cada viagem ainda mais especial.</p>
+    </div>
+    <div class="hero-stamp" aria-label="Resumo das viagens">
+      <strong>03</strong>
+      <span>viagens no roteiro</span>
+    </div>
+    </div>
   </header>
 
-  <main id="inicio">
-    <section>
-      <h2 id="resumo-titulo">Resumo</h2>
-      <p>Este espaço apresentará um resumo das viagens cadastradas.</p>
+  <main id="inicio" class="page-content">
+    <section class="summary-grid" aria-labelledby="resumo-titulo">
+    <h2 id="resumo-titulo" class="sr-only">Resumo das viagens</h2>
+    <article class="summary-card summary-card-highlight">
+      <span class="summary-icon" aria-hidden="true">✈</span>
+      <div><strong>03</strong><span>viagens planejadas</span></div>
+    </article>
+    <article class="summary-card">
+      <span class="summary-icon" aria-hidden="true">◷</span>
+      <div><strong>02</strong><span>próximos destinos</span></div>
+    </article>
+    <article class="summary-card">
+      <span class="summary-icon" aria-hidden="true">R$</span>
+      <div><strong>15.700</strong><span>orçamento estimado</span></div>
+    </article>
+    <article class="summary-card">
+      <span class="summary-icon" aria-hidden="true">✓</span>
+      <div><strong>01</strong><span>viagem concluída</span></div>
+    </article>
     </section>
 
-    <section id="cadastro">
-      <h2 id="cadastro-titulo">Cadastrar nova viagem</h2>
-      <form action="#viagens" method="post">
-        <fieldset>
-          <legend>Dados da viagem</legend>
-          <p><label for="cidade">Cidade de destino:</label> <input type="text" id="cidade" name="cidade" required></p>
-          <p><label for="pais">País:</label> <input type="text" id="pais" name="pais" required></p>
-          <p><label for="ida">Data de ida:</label> <input type="date" id="ida" name="ida" required></p>
-          <p><label for="volta">Data de volta:</label> <input type="date" id="volta" name="volta" required></p>
-          <p><label for="orcamento">Orçamento estimado:</label> <input type="number" id="orcamento" name="orcamento" min="0" step="0.01"></p>
-          <p>
-            <label for="status">Status:</label>
-            <select id="status" name="status">
-              <option value="planejada">Planejada</option>
-              <option value="andamento">Em andamento</option>
-              <option value="concluida">Concluída</option>
-            </select>
-          </p>
-          <p><label for="anotacoes">Anotações gerais:</label><br><textarea id="anotacoes" name="anotacoes" rows="5" cols="40"></textarea></p>
-        </fieldset>
-        <fieldset>
-          <legend>Informações do país</legend>
-          <p><label for="moeda">Moeda local:</label> <input type="text" id="moeda" name="moeda" readonly></p>
-          <p><label for="idioma">Idioma oficial:</label> <input type="text" id="idioma" name="idioma" readonly></p>
-          <p><label for="regiao">Região:</label> <input type="text" id="regiao" name="regiao" readonly></p>
-        </fieldset>
-        <button type="submit">Salvar viagem</button>
-        <button type="reset">Limpar formulário</button>
-      </form>
+    <section id="cadastro" class="panel form-panel" aria-labelledby="cadastro-titulo">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Organize seu roteiro</p>
+        <h2 id="cadastro-titulo">Cadastrar nova viagem</h2>
+      </div>
+      <span class="required-note">* Campos obrigatórios</span>
+    </div>
+    <form action="#viagens" method="post">
+      <fieldset>
+        <legend>Dados da viagem</legend>
+        <div class="form-grid">
+          <div class="field field-wide"><label for="cidade">Cidade de destino <span aria-hidden="true">*</span></label><input type="text" id="cidade" name="cidade" placeholder="Ex.: Lisboa" required></div>
+          <div class="field"><label for="pais">País <span aria-hidden="true">*</span></label><input type="text" id="pais" name="pais" placeholder="Ex.: Portugal" required></div>
+          <div class="field"><label for="ida">Data de ida <span aria-hidden="true">*</span></label><input type="date" id="ida" name="ida" required></div>
+          <div class="field"><label for="volta">Data de volta <span aria-hidden="true">*</span></label><input type="date" id="volta" name="volta" required></div>
+          <div class="field"><label for="orcamento">Orçamento estimado</label><input type="number" id="orcamento" name="orcamento" min="0" step="0.01" placeholder="R$ 0,00"></div>
+          <div class="field"><label for="status">Status</label><select id="status" name="status">
+            <option value="planejada">Planejada</option>
+            <option value="andamento">Em andamento</option>
+            <option value="concluida">Concluída</option>
+          </select></div>
+          <div class="field field-full"><label for="anotacoes">Anotações gerais</label><textarea id="anotacoes" name="anotacoes" rows="4" placeholder="Adicione ideias, reservas ou lugares para conhecer..."></textarea></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Informações do país</legend>
+        <div class="form-grid country-grid">
+          <div class="field"><label for="moeda">Moeda local</label><input type="text" id="moeda" name="moeda" placeholder="Preenchido automaticamente" readonly></div>
+          <div class="field"><label for="idioma">Idioma oficial</label><input type="text" id="idioma" name="idioma" placeholder="Preenchido automaticamente" readonly></div>
+          <div class="field"><label for="regiao">Região</label><input type="text" id="regiao" name="regiao" placeholder="Preenchido automaticamente" readonly></div>
+        </div>
+      </fieldset>
+      <div class="form-actions"><button class="button button-primary" type="submit">Salvar viagem <span aria-hidden="true">→</span></button><button class="button button-ghost" type="reset">Limpar formulário</button></div>
+    </form>
     </section>
 
-    <section id="viagens">
-      <h2 id="lista-titulo">Minhas viagens</h2>
+    <section id="viagens" class="panel trips-panel" aria-labelledby="lista-titulo">
+    <div class="section-heading list-heading"><div><p class="eyebrow">Seus destinos</p><h2 id="lista-titulo">Minhas viagens</h2></div><span class="result-count">3 resultados</span></div>
+    <div class="table-wrapper">
       <table>
-        <caption>Viagens cadastradas</caption>
+      <caption class="sr-only">Viagens cadastradas</caption>
         <thead>
           <tr>
             <th>Destino</th>
@@ -70,88 +110,81 @@
         </thead>
         <tbody>
           <tr>
-            <td>Paris, França</td>
+            <td><strong>Paris</strong><span>França</span></td>
             <td><time datetime="2024-10-15">15/10/2024</time></td>
             <td><time datetime="2024-10-22">22/10/2024</time></td>
             <td>R$ 8.500,00</td>
-            <td>Planejada</td>
-            <td><a href="#detalhes-paris">Ver detalhes</a> | <a href="#cadastro">Editar</a> | <button type="button">Excluir</button></td>
+            <td><span class="status status-planned">Planejada</span></td>
+            <td class="actions"><a href="#detalhes-paris">Detalhes</a><a href="#cadastro">Editar</a><button type="button" class="delete-action">Excluir</button></td>
           </tr>
           <tr>
-            <td>Amsterdã, Holanda</td>
+            <td><strong>Amsterdã</strong><span>Holanda</span></td>
             <td><time datetime="2024-12-02">02/12/2024</time></td>
             <td><time datetime="2024-12-09">09/12/2024</time></td>
             <td>R$ 5.200,00</td>
-            <td>Planejada</td>
-            <td><a href="#detalhes-amsterda">Ver detalhes</a> | <a href="#cadastro">Editar</a> | <button type="button">Excluir</button></td>
+            <td><span class="status status-planned">Planejada</span></td>
+            <td class="actions"><a href="#detalhes-amsterda">Detalhes</a><a href="#cadastro">Editar</a><button type="button" class="delete-action">Excluir</button></td>
           </tr>
           <tr>
-            <td>Salvador, Brasil</td>
+            <td><strong>Salvador</strong><span>Brasil</span></td>
             <td><time datetime="2024-07-10">10/07/2024</time></td>
             <td><time datetime="2024-07-15">15/07/2024</time></td>
             <td>R$ 2.000,00</td>
-            <td>Concluída</td>
-            <td><a href="#detalhes-salvador">Ver detalhes</a> | <a href="#cadastro">Editar</a> | <button type="button">Excluir</button></td>
+            <td><span class="status status-done">Concluída</span></td>
+            <td class="actions"><a href="#detalhes-salvador">Detalhes</a><a href="#cadastro">Editar</a><button type="button" class="delete-action">Excluir</button></td>
           </tr>
         </tbody>
-      </table>
+        </table>
+      </div>
     </section>
 
-    <aside id="pesquisa">
-      <h2 id="pesquisa-titulo">Pesquisar viagens</h2>
+    <aside id="pesquisa" class="panel search-panel" aria-labelledby="pesquisa-titulo">
+      <div class="section-heading"><div><p class="eyebrow">Encontre rapidamente</p><h2 id="pesquisa-titulo">Pesquisar viagens</h2></div></div>
       <form action="#viagens" method="get">
-        <p>
-          <label for="destino-pesquisa">Pesquisar por cidade ou país:</label>
-          <input type="search" id="destino-pesquisa" name="destino" placeholder="Ex.: Paris">
-        </p>
-        <p>
-          <label for="filtro-status">Filtrar por status:</label>
-          <select id="filtro-status" name="status">
+        <div class="search-grid">
+          <div class="field search-field"><label for="destino-pesquisa">Destino</label><input type="search" id="destino-pesquisa" name="destino" placeholder="Buscar cidade ou país"></div>
+          <div class="field"><label for="filtro-status">Filtrar por status</label><select id="filtro-status" name="status">
             <option value="todos">Todos</option>
             <option value="planejada">Planejada</option>
             <option value="andamento">Em andamento</option>
             <option value="concluida">Concluída</option>
-          </select>
-        </p>
-        <p>
-          <label for="ordenacao">Ordenar por:</label>
-          <select id="ordenacao" name="ordenacao">
+          </select></div>
+          <div class="field"><label for="ordenacao">Ordenar por</label><select id="ordenacao" name="ordenacao">
             <option value="data">Data da viagem</option>
             <option value="destino">Destino</option>
             <option value="orcamento">Orçamento</option>
-          </select>
-        </p>
-        <button type="submit">Pesquisar</button>
+          </select></div>
+          <button class="button button-dark search-button" type="submit">Pesquisar <span aria-hidden="true">⌕</span></button>
+        </div>
       </form>
     </aside>
 
-    <section>
-      <h2 id="detalhes-titulo">Detalhes de uma viagem</h2>
-      <article id="detalhes-paris">
+    <section class="details-section" aria-labelledby="detalhes-titulo">
+      <div class="section-heading"><div><p class="eyebrow">Inspire-se</p><h2 id="detalhes-titulo">Detalhes de uma viagem</h2></div></div>
+      <article id="detalhes-paris" class="detail-card">
+        <div class="detail-image"><img src="assets/img/paris.jpg" alt="Vista de Paris com a Torre Eiffel"><span class="status status-planned">Planejada</span></div>
+        <div class="detail-content">
         <h3>Paris, França</h3>
-        <figure>
-          <img src="assets/img/paris.jpg" alt="">
-          <figcaption>Destino da viagem planejada</figcaption>
-        </figure>
-        <p><strong>Período:</strong> 15/10/2024 a 22/10/2024</p>
-        <p><strong>Orçamento:</strong> R$ 8.500,00</p>
-        <p><strong>Status:</strong> Planejada</p>
-        <p><strong>Moeda:</strong> Euro (EUR)</p>
-        <p><strong>Idioma:</strong> Francês</p>
-        <p><strong>Região:</strong> Europa</p>
-        <p><strong>Anotações:</strong> Visitar a Torre Eiffel e conhecer alguns museus.</p>
-        <a href="#cadastro">Editar viagem</a>
-        <button type="button">Excluir viagem</button>
+        <p class="detail-intro">Uma semana para explorar arte, história e os encantos da capital francesa.</p>
+        <div class="detail-facts"><p><span>Período</span><strong>15/10 a 22/10/2024</strong></p><p><span>Orçamento</span><strong>R$ 8.500,00</strong></p><p><span>Região</span><strong>Europa</strong></p></div>
+        <p class="notes"><strong>Anotações</strong> Visitar a Torre Eiffel e conhecer alguns museus.</p>
+        <div class="detail-actions"><a class="button button-primary" href="#cadastro">Editar viagem</a><button class="button button-danger" type="button">Excluir viagem</button></div>
+        </div>
       </article>
-      <article id="detalhes-salvador">
+      <article id="detalhes-salvador" class="compact-detail">
         <h3>Salvador, Brasil</h3>
         <p>Viagem concluída em julho de 2024.</p>
+      </article>
+      <article id="detalhes-amsterda" class="compact-detail">
+        <h3>Amsterdã, Holanda</h3>
+        <p>Viagem planejada para dezembro de 2024.</p>
       </article>
     </section>
   </main>
 
   <footer>
-    <p>Roteiriza - Viagens</p>
+    <p><strong>Roteiriza</strong> — viagens feitas para lembrar.</p>
+    <p class="footer-small">Planeje com intenção. Viva com presença.</p>
   </footer>
 </body>
 </html>
