@@ -79,6 +79,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shado
 input[readonly] { background: #f1f4f2; color: var(--muted); }
 textarea { resize: vertical; }
 .form-actions, .detail-actions { display: flex; align-items: center; gap: .8rem; }
+.form-feedback { min-height: 1.5rem; margin: 1rem 0 0; color: var(--teal); font-size: .82rem; font-weight: 600; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; border: 1px solid transparent; border-radius: .45rem; padding: .75rem 1.15rem; cursor: pointer; font: inherit; font-size: .82rem; font-weight: 700; text-decoration: none; transition: transform .2s, background .2s; }
 .button:hover { transform: translateY(-1px); }
 .button-primary { background: var(--teal); color: #fff; }
@@ -100,11 +101,13 @@ tbody tr { transition: background .2s; }
 tbody tr:hover { background: #f7fbf9; }
 .status { display: inline-block !important; width: fit-content; padding: .3rem .6rem; border-radius: 999px; font-size: .7rem !important; font-weight: 700; }
 .status-planned { background: #fff1cf; color: #946d13 !important; }
+.status-progress { background: #dcecf8; color: #256184 !important; }
 .status-done { background: var(--mint); color: var(--teal) !important; }
 .actions { display: flex; align-items: center; gap: .75rem; }
-.actions a { color: var(--teal); font-weight: 700; text-decoration: none; }
-.actions a:hover { text-decoration: underline; }
+.link-button { padding: 0; border: 0; background: none; color: var(--teal); cursor: pointer; font: inherit; font-size: .78rem; font-weight: 700; }
+.link-button:hover { text-decoration: underline; }
 .delete-action { border: 0; background: none; color: #bb5e4e; cursor: pointer; font: inherit; font-size: .78rem; }
+.empty-state { padding: 2rem 1rem; color: var(--muted); text-align: center; white-space: normal; }
 .search-panel { background: var(--mint); border: 0; box-shadow: none; }
 .search-grid { grid-template-columns: 2fr 1fr 1fr auto; align-items: end; }
 .search-button { min-height: 2.85rem; }

@@ -29,7 +29,7 @@
       <p class="hero-text">Organize seus destinos, acompanhe seus planos e deixe cada viagem ainda mais especial.</p>
     </div>
     <div class="hero-stamp" aria-label="Resumo das viagens">
-      <strong>03</strong>
+      <strong id="hero-total">03</strong>
       <span>viagens no roteiro</span>
     </div>
     </div>
@@ -40,19 +40,19 @@
     <h2 id="resumo-titulo" class="sr-only">Resumo das viagens</h2>
     <article class="summary-card summary-card-highlight">
       <span class="summary-icon" aria-hidden="true">✈</span>
-      <div><strong>03</strong><span>viagens planejadas</span></div>
+      <div>      <strong id="total-trips">03</strong><span>viagens planejadas</span></div>
     </article>
     <article class="summary-card">
       <span class="summary-icon" aria-hidden="true">◷</span>
-      <div><strong>02</strong><span>próximos destinos</span></div>
+      <div>      <strong id="upcoming-trips">02</strong><span>próximos destinos</span></div>
     </article>
     <article class="summary-card">
       <span class="summary-icon" aria-hidden="true">R$</span>
-      <div><strong>15.700</strong><span>orçamento estimado</span></div>
+      <div>      <strong id="total-budget">R$ 15.700</strong><span>orçamento estimado</span></div>
     </article>
     <article class="summary-card">
       <span class="summary-icon" aria-hidden="true">✓</span>
-      <div><strong>01</strong><span>viagem concluída</span></div>
+      <div>      <strong id="completed-trips">01</strong><span>viagem concluída</span></div>
     </article>
     </section>
 
@@ -64,7 +64,8 @@
       </div>
       <span class="required-note">* Campos obrigatórios</span>
     </div>
-    <form action="#viagens" method="post">
+    <form id="trip-form" action="#viagens" method="post">
+      <input type="hidden" id="trip-id" name="id">
       <fieldset>
         <legend>Dados da viagem</legend>
         <div class="form-grid">
@@ -89,12 +90,13 @@
           <div class="field"><label for="regiao">Região</label><input type="text" id="regiao" name="regiao" placeholder="Preenchido automaticamente" readonly></div>
         </div>
       </fieldset>
-      <div class="form-actions"><button class="button button-primary" type="submit">Salvar viagem <span aria-hidden="true">→</span></button><button class="button button-ghost" type="reset">Limpar formulário</button></div>
+      <div class="form-actions"><button id="submit-trip" class="button button-primary" type="submit">Salvar viagem <span aria-hidden="true">→</span></button><button id="reset-form" class="button button-ghost" type="reset">Limpar formulário</button></div>
     </form>
+    <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
     </section>
 
     <section id="viagens" class="panel trips-panel" aria-labelledby="lista-titulo">
-    <div class="section-heading list-heading"><div><p class="eyebrow">Seus destinos</p><h2 id="lista-titulo">Minhas viagens</h2></div><span class="result-count">3 resultados</span></div>
+    <div class="section-heading list-heading"><div><p class="eyebrow">Seus destinos</p><h2 id="lista-titulo">Minhas viagens</h2></div><span id="result-count" class="result-count">3 resultados</span></div>
     <div class="table-wrapper">
       <table>
       <caption class="sr-only">Viagens cadastradas</caption>
@@ -108,39 +110,14 @@
             <th>Ações</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><strong>Paris</strong><span>França</span></td>
-            <td><time datetime="2024-10-15">15/10/2024</time></td>
-            <td><time datetime="2024-10-22">22/10/2024</time></td>
-            <td>R$ 8.500,00</td>
-            <td><span class="status status-planned">Planejada</span></td>
-            <td class="actions"><a href="#detalhes-paris">Detalhes</a><a href="#cadastro">Editar</a><button type="button" class="delete-action">Excluir</button></td>
-          </tr>
-          <tr>
-            <td><strong>Amsterdã</strong><span>Holanda</span></td>
-            <td><time datetime="2024-12-02">02/12/2024</time></td>
-            <td><time datetime="2024-12-09">09/12/2024</time></td>
-            <td>R$ 5.200,00</td>
-            <td><span class="status status-planned">Planejada</span></td>
-            <td class="actions"><a href="#detalhes-amsterda">Detalhes</a><a href="#cadastro">Editar</a><button type="button" class="delete-action">Excluir</button></td>
-          </tr>
-          <tr>
-            <td><strong>Salvador</strong><span>Brasil</span></td>
-            <td><time datetime="2024-07-10">10/07/2024</time></td>
-            <td><time datetime="2024-07-15">15/07/2024</time></td>
-            <td>R$ 2.000,00</td>
-            <td><span class="status status-done">Concluída</span></td>
-            <td class="actions"><a href="#detalhes-salvador">Detalhes</a><a href="#cadastro">Editar</a><button type="button" class="delete-action">Excluir</button></td>
-          </tr>
-        </tbody>
+        <tbody id="trip-list"></tbody>
         </table>
       </div>
     </section>
 
     <aside id="pesquisa" class="panel search-panel" aria-labelledby="pesquisa-titulo">
       <div class="section-heading"><div><p class="eyebrow">Encontre rapidamente</p><h2 id="pesquisa-titulo">Pesquisar viagens</h2></div></div>
-      <form action="#viagens" method="get">
+      <form id="search-form" action="#viagens" method="get">
         <div class="search-grid">
           <div class="field search-field"><label for="destino-pesquisa">Destino</label><input type="search" id="destino-pesquisa" name="destino" placeholder="Buscar cidade ou país"></div>
           <div class="field"><label for="filtro-status">Filtrar por status</label><select id="filtro-status" name="status">
@@ -161,24 +138,7 @@
 
     <section class="details-section" aria-labelledby="detalhes-titulo">
       <div class="section-heading"><div><p class="eyebrow">Inspire-se</p><h2 id="detalhes-titulo">Detalhes de uma viagem</h2></div></div>
-      <article id="detalhes-paris" class="detail-card">
-        <div class="detail-image"><img src="assets/img/paris.jpg" alt="Vista de Paris com a Torre Eiffel"><span class="status status-planned">Planejada</span></div>
-        <div class="detail-content">
-        <h3>Paris, França</h3>
-        <p class="detail-intro">Uma semana para explorar arte, história e os encantos da capital francesa.</p>
-        <div class="detail-facts"><p><span>Período</span><strong>15/10 a 22/10/2024</strong></p><p><span>Orçamento</span><strong>R$ 8.500,00</strong></p><p><span>Região</span><strong>Europa</strong></p></div>
-        <p class="notes"><strong>Anotações</strong> Visitar a Torre Eiffel e conhecer alguns museus.</p>
-        <div class="detail-actions"><a class="button button-primary" href="#cadastro">Editar viagem</a><button class="button button-danger" type="button">Excluir viagem</button></div>
-        </div>
-      </article>
-      <article id="detalhes-salvador" class="compact-detail">
-        <h3>Salvador, Brasil</h3>
-        <p>Viagem concluída em julho de 2024.</p>
-      </article>
-      <article id="detalhes-amsterda" class="compact-detail">
-        <h3>Amsterdã, Holanda</h3>
-        <p>Viagem planejada para dezembro de 2024.</p>
-      </article>
+      <article id="trip-details" class="detail-card" aria-live="polite"></article>
     </section>
   </main>
 
@@ -186,5 +146,6 @@
     <p><strong>Roteiriza</strong> — viagens feitas para lembrar.</p>
     <p class="footer-small">Planeje com intenção. Viva com presença.</p>
   </footer>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
