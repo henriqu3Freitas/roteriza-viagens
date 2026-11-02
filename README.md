@@ -36,6 +36,6 @@ A aplicação agora utiliza JavaScript para:
 - renderizar a listagem e os detalhes dinamicamente;
 - pesquisar por cidade ou país, filtrar por status e ordenar resultados;
 - persistir os registros no `localStorage`, inclusive após recarregar a página;
-- consultar a API pública [REST Countries](https://restcountries.com/) para preencher moeda, idioma e região do país informado.
+- consultar a API pública [CountriesNow](https://countriesnow.space/) para preencher a moeda do país informado.
 
-Os dados retornados pela API complementam o cadastro da viagem e são armazenados junto ao registro no `localStorage`.
+O dado retornado pela API complementa o cadastro da viagem e é armazenado junto ao registro no `localStorage`.

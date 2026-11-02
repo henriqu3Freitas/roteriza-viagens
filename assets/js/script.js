@@ -1,5 +1,5 @@
 const STORAGE_KEY = 'roteiriza-viagens';
-const API_URL = 'https://restcountries.com/v3.1/name/';
+const API_URL = 'https://countriesnow.space/api/v0.1/countries/info?returns=currency';
 
 const initialTrips = [
   {
@@ -212,14 +212,19 @@ async function loadCountryData() {
   if (!country) return;
   elements.feedback.textContent = 'Buscando informações do país...';
   try {
-    const response = await fetch(`${API_URL}${encodeURIComponent(country)}?fields=currencies,languages,region,flags,name`);
+    const response = await fetch(`${API_URL}`);
     if (!response.ok) throw new Error('País não encontrado');
-    const [data] = await response.json();
-    const currency = Object.entries(data.currencies || {})[0];
-    elements.currency.value = currency ? `${currency[1].name} (${currency[0]})` : '';
-    elements.language.value = Object.values(data.languages || {}).join(', ');
-    elements.region.value = data.region || '';
-    elements.feedback.textContent = 'Dados do país preenchidos pela API Rest Countries.';
+    const data = await response.json();
+    const normalizedCountry = country.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const countryData = data.data.find((item) => {
+      const normalizedName = item.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      return normalizedName === normalizedCountry ||
+        (normalizedCountry === 'brasil' && normalizedName === 'brazil') ||
+        (normalizedCountry === 'holanda' && normalizedName === 'netherlands');
+    });
+    if (!countryData) throw new Error('País não encontrado');
+    elements.currency.value = countryData.currency || '';
+    elements.feedback.textContent = 'Moeda preenchida pela API pública CountriesNow.';
   } catch (error) {
     elements.feedback.textContent = 'Não foi possível buscar os dados desse país. Você ainda pode salvar a viagem.';
   }
