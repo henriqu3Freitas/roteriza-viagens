@@ -28,4 +28,14 @@ A interface foi evoluída com:
 - Media Queries para adaptação em tablets e celulares;
 - navegação responsiva sem rolagem horizontal injustificada.
 
-O comportamento dos dados continua previsto para uma etapa futura de JavaScript.
+## Etapa 3 — Aplicação interativa
+
+A aplicação agora utiliza JavaScript para:
+
+- cadastrar, editar, visualizar e excluir viagens;
+- renderizar a listagem e os detalhes dinamicamente;
+- pesquisar por cidade ou país, filtrar por status e ordenar resultados;
+- persistir os registros no `localStorage`, inclusive após recarregar a página;
+- consultar a API pública [REST Countries](https://restcountries.com/) para preencher moeda, idioma e região do país informado.
+
+Os dados retornados pela API complementam o cadastro da viagem e são armazenados junto ao registro no `localStorage`.
