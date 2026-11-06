@@ -64,6 +64,7 @@ const elements = {
   language: document.querySelector('#idioma'),
   region: document.querySelector('#regiao'),
   id: document.querySelector('#trip-id'),
+  image: document.querySelector('#imagem'),
   submit: document.querySelector('#submit-trip'),
   heroTotal: document.querySelector('#hero-total'),
   total: document.querySelector('#total-trips'),
@@ -166,6 +167,7 @@ function renderDetails(id) {
     elements.details.innerHTML = '<div class="detail-content"><h3>Nenhuma viagem cadastrada</h3><p class="detail-intro">Cadastre sua primeira viagem para visualizar os detalhes aqui.</p></div>';
     return;
   }
+  const evaluation = evaluateTrip(trip);
   selectedTripId = trip.id;
   elements.details.innerHTML = `
     <div class="detail-image">
@@ -181,6 +183,20 @@ function renderDetails(id) {
         <p><span>Região</span><strong>${escapeHtml(trip.regiao || 'Não informado')}</strong></p>
       </div>
       <p class="notes"><strong>Informações locais</strong> ${escapeHtml(trip.idioma || 'Idioma não informado')} · ${escapeHtml(trip.moeda || 'Moeda não informada')}</p>
+      <section class="trip-evaluation ${evaluation.isWorthIt ? 'evaluation-positive' : 'evaluation-warning'}" aria-labelledby="evaluation-title">
+        <div class="evaluation-heading">
+          <div>
+            <span class="evaluation-label">Análise rápida</span>
+            <h4 id="evaluation-title">${evaluation.isWorthIt ? 'Essa viagem parece compensar' : 'Vale revisar antes de decidir'}</h4>
+          </div>
+          <strong class="evaluation-score">${evaluation.score}/${evaluation.total}</strong>
+        </div>
+        <p class="evaluation-explanation">${evaluation.explanation}</p>
+        <div class="evaluation-columns">
+          <div><strong>Dados positivos</strong><ul>${evaluation.positives.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></div>
+          <div><strong>Pontos de atenção</strong><ul>${evaluation.negatives.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></div>
+        </div>
+      </section>
       <div class="detail-actions">
         <button class="button button-primary" type="button" data-action="edit" data-id="${trip.id}">Editar viagem</button>
         <button class="button button-danger" type="button" data-action="delete" data-id="${trip.id}">Excluir viagem</button>
@@ -189,11 +205,41 @@ function renderDetails(id) {
   `;
 }
 
+function getTripDuration(trip) {
+  const start = new Date(`${trip.ida}T00:00:00`);
+  const end = new Date(`${trip.volta}T00:00:00`);
+  return Math.round((end - start) / 86400000) + 1;
+}
+
+function evaluateTrip(trip) {
+  const duration = getTripDuration(trip);
+  const positives = [];
+  const negatives = [];
+  if (Number(trip.orcamento) > 0) positives.push(`Orçamento estimado de ${formatMoney(trip.orcamento)}.`);
+  else negatives.push('Informe um orçamento para avaliar melhor o custo-benefício.');
+  if (duration >= 3) positives.push(`${duration} dias permitem aproveitar melhor o destino.`);
+  else negatives.push('A viagem tem poucos dias; confira se o deslocamento vale o tempo disponível.');
+  if (trip.anotacoes?.trim()) positives.push('Você já registrou ideias e objetivos para a viagem.');
+  else negatives.push('Adicione anotações ou objetivos para deixar o planejamento mais completo.');
+  if (trip.imagem && trip.imagem !== 'assets/img/paris.jpg') positives.push('A viagem já tem uma imagem personalizada.');
+  else negatives.push('Adicione uma imagem para personalizar o registro da viagem.');
+  const score = positives.length;
+  return {
+    positives,
+    negatives,
+    score,
+    total: positives.length + negatives.length,
+    isWorthIt: score >= negatives.length,
+    explanation: 'Este veredito é uma triagem baseada apenas nos dados cadastrados, não uma previsão de preços ou qualidade da viagem.'
+  };
+}
+
 function fillForm(trip) {
   Object.entries(trip).forEach(([key, value]) => {
     const field = elements.form.elements[key];
-    if (field) field.value = value;
+    if (field && key !== 'imagem') field.value = value;
   });
+  elements.image.value = '';
   elements.submit.innerHTML = 'Atualizar viagem <span aria-hidden="true">→</span>';
   document.querySelector('#cadastro-titulo').textContent = 'Editar viagem';
   document.querySelector('#cadastro').scrollIntoView({ behavior: 'smooth' });
@@ -205,6 +251,15 @@ function resetForm() {
   elements.submit.innerHTML = 'Salvar viagem <span aria-hidden="true">→</span>';
   document.querySelector('#cadastro-titulo').textContent = 'Cadastrar nova viagem';
   elements.feedback.textContent = '';
+}
+
+function readImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('Não foi possível ler a imagem.'));
+    reader.readAsDataURL(file);
+  });
 }
 
 async function loadCountryData() {
@@ -230,15 +285,36 @@ async function loadCountryData() {
   }
 }
 
-elements.form.addEventListener('submit', (event) => {
+elements.form.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const data = Object.fromEntries(new FormData(elements.form));
+  const formData = new FormData(elements.form);
+  const imageFile = formData.get('imagem');
+  const data = Object.fromEntries(formData);
+  delete data.imagem;
   if (data.ida > data.volta) {
     elements.feedback.textContent = 'A data de volta deve ser posterior à data de ida.';
     return;
   }
-  const trip = { ...data, orcamento: Number(data.orcamento || 0), id: data.id || `${Date.now()}-${data.cidade.toLowerCase()}` };
   const editing = Boolean(data.id);
+  const previousTrip = trips.find((item) => item.id === data.id);
+  let imagem = previousTrip?.imagem || 'assets/img/paris.jpg';
+  if (imageFile instanceof File && imageFile.size > 0) {
+    if (!imageFile.type.startsWith('image/')) {
+      elements.feedback.textContent = 'Escolha um arquivo de imagem válido.';
+      return;
+    }
+    if (imageFile.size > 5 * 1024 * 1024) {
+      elements.feedback.textContent = 'A imagem deve ter no máximo 5 MB.';
+      return;
+    }
+    try {
+      imagem = await readImage(imageFile);
+    } catch (error) {
+      elements.feedback.textContent = 'Não foi possível carregar a imagem escolhida.';
+      return;
+    }
+  }
+  const trip = { ...data, imagem, orcamento: Number(data.orcamento || 0), id: data.id || `${Date.now()}-${data.cidade.toLowerCase()}` };
   trips = editing ? trips.map((item) => item.id === data.id ? { ...item, ...trip } : item) : [...trips, trip];
   saveTrips();
   selectedTripId = trip.id;
